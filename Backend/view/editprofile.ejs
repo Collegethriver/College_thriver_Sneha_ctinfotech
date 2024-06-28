@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver</title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+
+
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="#"><img class="desktop-logo" src="<%= baseurl %>mentorpanel/img/core-img/logo.png"
+                        alt="Desktop Logo"> <img class="small-logo"
+                        src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu">
+                            <li class="treeview active">
+                                <a class="menu-active" href="/chat-box/<%=  mentordata[0].id %>">
+                                    <i class="bi bi-chat-left-text-fill"></i>
+                                    <span>Mentor Chat</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="#"><img src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class="bi bi-list"></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class="bi bi-list"></i>
+                        </div>
+                    </div>
+
+                    <!-- Left Side Nav -->
+                    <!-- <ul class="left-side-navbar d-flex align-items-center">
+                        <li class="hide-phone app-search">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="bx bx-search-alt"></span>
+                        </li>
+                    </ul> -->
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-menu dropdown-menu-right">
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <!-- <img src="<%= baseurl %>mentorpanel/img/bg-img/person_1.jpg" alt=""> -->
+                                <img src="<%= baseurl %>profile/<%= mentordata[0].profile_image %>" alt="">
+                            </button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="/mentorprofile/<%= mentordata[0].id %>" class="dropdown-item"><i
+                                            class="bx bx-user font-15" aria-hidden="true"></i> My profile</a>
+
+                                    <a href="/changepassword/<%=  mentordata[0].id %>" class="dropdown-item"><i
+                                            class="bx bx-wrench font-15" aria-hidden="true"></i> Change Password</a>
+                                    <a href="/logout" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content mt-5">
+                <div class="content-wraper-area">
+                    <div class="container-fluid">
+                        <div class="row g-4">
+
+
+                            <div class="col-lg-12 mx-auto">
+                                <div>
+                                    <div class="card mb-4">
+                                        <div class="card-header-cu">
+                                            <h6 class="mb-0">Edit Profile</h6>
+                                            <% if (typeof session !=='undefined' && session.message) { %>
+                                                <div class="alert alert-success">
+                                                    <%= session.message %>
+                                                </div>
+                                                <% delete session.message; } %>
+                                                    <% if (typeof alertmsg !=='undefined' && alertmsg) { %>
+                                                        <div class="alert alert-danger">
+                                                            <%= alertmsg %>
+                                                        </div>
+                                                        <% } %>
+                                                            <!-- <span style="color:red;"><%= alertmsg %></span> -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="card-body">
+                                                <form id="mentorFormprofile" enctype="multipart/form-data" method="post"
+                                                    action="/mentorupdateprofile">
+                                                    <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                                                        <div class="account-img">
+                                                            <img class="oldimg"
+                                                                src="<%= baseurl %>profile/<%= msg[0].profile_image %>"
+                                                                alt="">
+                                                            <div id="preview" width="90" height="90">
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <!-- <h6>
+                                                            Ajoy Das
+                                                        </h6> -->
+                                                            <div class="mt-3">
+                                                                <label for="ct_upload_img">
+                                                                    <a
+                                                                        class="btn btn-sm ct_custom_btn  ct_fw_500 ct_py_8 px-4 ">Upload</a>
+                                                                    <input type="file" id="ct_upload_img" name="profile"
+                                                                        class="d-none">
+                                                                </label>
+                                                                <!-- <a href="#!"
+                                                                class="btn btn-sm ct_custom_delete_btn ct_custom_btn  ct_fw_500 ct_py_8 ms-md-2">Remove</a> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-4">
+                                                            <h5 class="mb-3">Personal Info</h5>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label"> First Name</label>
+                                                                        <input type="hidden" name="mentorId"
+                                                                            value="<%= msg[0].id %>"
+                                                                            class="form-control">
+                                                                        <input type="text" name="name"
+                                                                            value="<%= msg[0].name %>"
+                                                                            class="form-control"
+                                                                            id="formrow-firstname-input"
+                                                                            placeholder="First name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Last name</label>
+                                                                        <input type="text" name="lname"
+                                                                            value="<%= msg[0].lname %>"
+                                                                            class="form-control" id="formrow-last-input"
+                                                                            placeholder="Last name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Email address</label>
+                                                                        <input type="email" name="email"
+                                                                            value="<%= msg[0].email %>"
+                                                                            class="form-control"
+                                                                            id="formrow-email-input"
+                                                                            placeholder="exple@98.com">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Gender</label>
+                                                                        <select name="gender" id="gender"
+                                                                            class="form-control">
+                                                                            <option <%=msg[0].gender==='male'
+                                                                                ? 'selected' : '' %> value="male">Male
+                                                                            </option>
+                                                                            <option <%=msg[0].gender==='female'
+                                                                                ? 'selected' : '' %>
+                                                                                value="female">Female</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Date Of Birth</label>
+                                                                        <input type="text" name="dob"
+                                                                            value="<%= msg[0].dob ? msg[0].dob : '' %>"
+                                                                            class="form-control">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Ethnicity </label>
+                                                                        <input type="text" name="ethnicity"
+                                                                            value="<%= msg[0].ethnicity %>"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Phone Number</label>
+                                                                        <input type="text" name="PhoneNumber"
+                                                                            value="<%= msg[0].PhoneNumber %>"
+                                                                            class="form-control"
+                                                                            placeholder="Phone number">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Address</label>
+                                                                        <input type="text" name="address"
+                                                                            value="<%= msg[0].address %>"
+                                                                            class="form-control" placeholder="Address">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Zip Code</label>
+                                                                        <input type="text" name="zip_code"
+                                                                            value="<%= msg[0].zip_code %>"
+                                                                            class="form-control" placeholder="Zip code">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Career</label>
+                                                                        <input type="text" name="career"
+                                                                            value="<%= msg[0].career %>"
+                                                                            class="form-control" placeholder="Career">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Expertise</label>
+                                                                        <input type="text" name="expertise"
+                                                                            value="<%= msg[0].expertise %>"
+                                                                            class="form-control"
+                                                                            placeholder="Expertise">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Before
+                                                                            Mentored</label>
+                                                                        <input type="text" name="beforeMentored"
+                                                                            value="<%= msg[0].beforeMentored %>"
+                                                                            class="form-control"
+                                                                            placeholder="Before Mentored">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Mentor
+                                                                            Experience</label>
+                                                                        <input type="text" name="mentorExperince"
+                                                                            value="<%= msg[0].mentorExperince %>"
+                                                                            class="form-control"
+                                                                            placeholder="Mentor Experience">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Mentor Name</label>
+                                                                        <input type="text" name="MentorName"
+                                                                            value="<%= msg[0].MentorName %>"
+                                                                            class="form-control"
+                                                                            placeholder="Mentor Name">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Contact with
+                                                                            Mentor</label>
+                                                                        <input type="text" name="contactWithMentor"
+                                                                            value="<%= msg[0].contactWithMentor %>"
+                                                                            class="form-control"
+                                                                            placeholder="Contact with Mentor">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Additional
+                                                                            Information</label>
+                                                                        <input type="text" name="additionalInfo"
+                                                                            value="<%= msg[0].additionalInfo %>"
+                                                                            class="form-control"
+                                                                            placeholder="Additional Information">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Additional
+                                                                            Resource</label>
+                                                                        <input type="text" name="additionalResorce"
+                                                                            value="<%= msg[0].additionalResorce %>"
+                                                                            class="form-control"
+                                                                            placeholder="Additional Resource">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="text-muted" for="totalHours">Date
+                                                                            From</label>
+                                                                        <input class="form-control" type="date"
+                                                                            name="dateFrom" id="totalHours"
+                                                                            value="<%= msg[0].date_from %>"
+                                                                            placeholder="Enter Total Hours">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="text-muted" for="totalHours">Date
+                                                                            To</label>
+                                                                        <input class="form-control" type="date"
+                                                                            name="dateTo" id="totalHours"
+                                                                            value="<%= msg[0].date_to %>"
+                                                                            placeholder="Enter Total Hours">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="text-muted" for="daysTimes">Time
+                                                                            From</label>
+                                                                        <input type="time" class="form-control"
+                                                                            name="daysTimesFrom" id="daysTimes"
+                                                                            value="<%= msg[0].time_from %>"
+                                                                            placeholder="Enter Days and Times Available">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="text-muted" for="daysTimes">Time
+                                                                            To</label>
+                                                                        <input type="time" class="form-control"
+                                                                            name="daysTimesTo" id="daysTimes"
+                                                                            value="<%= msg[0].time_to %>"
+                                                                            placeholder="Enter Days and Times Available">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-12 mt-2 text-center mt-5">
+                                                        <button type="submit" class="ct_custom_btn w-auto ct_fw_500">
+                                                            Save changes
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-center">
+                                <!-- Copywrite Text -->
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; <a href="https://college-thriver.org/"
+                                            target="_blank">Collage Thriver</a></p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/jquery.nice-select.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+
+</body>
+
+
+<script>
+    const preview = (file) => {
+        const fr = new FileReader();
+        fr.onload = () => {
+            const img = document.createElement("img");
+            img.src = fr.result;  // String Base64 
+            img.alt = file.name;
+            img.classList.add("newimg");
+
+            // Hide the new image
+            $('.newimg').remove();
+
+            // Remove any existing image with class 'oldimg'
+            const oldImg = document.querySelector('.oldimg');
+            if (oldImg) {
+                oldImg.remove();
+            }
+
+            // Append the new image
+            document.querySelector('#preview').append(img);
+        };
+        fr.readAsDataURL(file);
+    };
+
+    document.querySelector("#ct_upload_img").addEventListener("change", (ev) => {
+        if (!ev.target.files) return; // Do nothing.
+        [...ev.target.files].forEach(preview);
+    });
+
+</script>
+
+</html>

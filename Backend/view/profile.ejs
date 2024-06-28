@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from demo.riktheme.com/fojota/side-menu/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Mar 2024 09:59:52 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver</title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+
+    <!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="#"><img class="desktop-logo" src="<%= baseurl %>mentorpanel/img/core-img/logo.png"
+                        alt="Desktop Logo"> <img class="small-logo"
+                        src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu">
+                            <li class="treeview active">
+                                <a class="menu-active" href="/chat-box/<%=  mentordata[0].id %>">
+                                    <i class="bi bi-chat-left-text-fill"></i>
+                                    <span>Mentor Chat</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="#"><img src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class="bi bi-list"></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class="bi bi-list"></i>
+                        </div>
+                    </div>
+
+                    <!-- Left Side Nav -->
+                    <!-- <ul class="left-side-navbar d-flex align-items-center">
+                    <li class="hide-phone app-search">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="bx bx-search-alt"></span>
+                    </li>
+                </ul> -->
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Top Notifications Area -->
+                                <div class="top-notifications-area">
+                                    <!-- Heading -->
+                                    <div class="notifications-heading">
+                                        <div class="heading-title">
+                                            <h6>Notifications</h6>
+                                        </div>
+                                        <span>11</span>
+                                    </div>
+
+                                    <div class="notifications-box" id="notificationsBox">
+                                        <a href="#" class="dropdown-item">
+
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> <img
+                                    src="<%= baseurl %>profile/<%= mentordata[0].profile_image %>" alt=""></button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="/mentorprofile/<%=  mentordata[0].id  %>" class="dropdown-item"><i
+                                            class="bx bx-user font-15" aria-hidden="true"></i> My profile</a>
+
+                                    <a href="/changepassword/<%=  mentordata[0].id  %>" class="dropdown-item"><i
+                                            class="bx bx-wrench font-15" aria-hidden="true"></i> Change Password</a>
+                                    <a href="/logout" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content mt-5">
+                <div class="content-wraper-area">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="card">
+                                    <h4 class="p-4 pb-0">My Profile</h4>
+                                    <!-- Your editprofile.ejs page -->
+                                    <div class="card-body">
+                                        <div
+                                            class="d-sm-flex align-items-center profile-user-header main-profile-cover">
+                                            <div class="single-profile-image">
+                                                <img src="<%= baseurl %>profile/<%= msg[0].profile_image %>" alt="">
+                                            </div>
+                                            <div class="flex-fill main-profile-meta">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <h6 class="mb-0">
+                                                            <%= msg[0].name %>
+                                                                <%= msg[0].lname %>
+                                                        </h6>
+
+                                                    </div>
+                                                    <div class="follow--btn-area">
+                                                        <a href="/mentor-editprofile/<%= msg[0].id %>"
+                                                            class="ct_custom_btn w-auto ct_fw_500">Edit Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="pt-4 pb-4 border-bottom col-md-12">
+                                                <div class="personal-info-area">
+                                                    <p class="mb-2 text-dark">Personal Info:</p>
+                                                    <ul class="list-group personal-data">
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> First Name : </div> <span
+                                                                    class="text-muted">
+                                                                    <%= msg[0].name %>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> Last Name : </div> <span
+                                                                    class="text-muted">
+                                                                    <%= msg[0].lname %>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> Email : </div> <span
+                                                                    class="text-muted">
+                                                                    <%= msg[0].email %>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> Gender : </div> <span
+                                                                    class="text-muted">
+                                                                    <%= msg[0].gender %>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> Date Of Birth : </div> <span
+                                                                    class="text-muted">
+                                                                    <%= msg[0].dob %>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div class="d-flex flex-wrap align-items-center">
+                                                                <div class="me-2"> Ethnicity : </div> <span
+                                                                    class="text-muted">
+                                                                    <ul class="d-flex align-items-center gap-2">
+                                                                        <li>
+                                                                            <%= msg[0].ethnicity %>
+                                                                        </li>
+                                                                        <!-- <li>Asian or Pacific Islander,</li>
+                                                                    <li>African American</li> -->
+                                                                    </ul>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-center">
+                                <!-- Copywrite Text -->
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; <a href="https://college-thriver.org/"
+                                            target="_blank">Collage Thriver</a></p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+
+</body>
+<script>
+    $(document).ready(function () {
+        if (window.localStorage.getItem('user_token') == null) {
+            location.replace("http://192.168.1.38:4000/mentor-login")
+        }
+    });
+</script>
+
+</html>
+
+<!-- <% if (session && session.mentor_Id) { %>
+    <p>Welcome, <%= session.mentor_Id %>!</p><% } %> -->

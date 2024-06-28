@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Simple Chat App</title>
+    <style>
+        /* Add your styles for left and right messages here */
+        .left-message {
+            text-align: left;
+            color: blue;
+        }
+
+        .right-message {
+            text-align: right;
+            color: green;
+        }
+
+        #messages{
+            list-style-type:none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="messages"></ul>
+    <form id="form" action="" style="text-align-last: right;">
+        <input type="text" id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(function () {
+    const socket = io();
+    const form = $('form');
+    const input = $('#m');
+    const messages = $('#messages');
+
+    // Prompt the user for a target user to start a private chat
+    const targetUserId = prompt('Enter the target user ID for private chat:');
+    // console.log('private chat3 >>>',targetUserId);
+    // Initiate private chat
+    socket.emit('private chat', targetUserId);
+
+    form.submit(function (e) {
+        e.preventDefault();
+        if (input.val()) {
+            socket.emit('private message', {
+                targetUserId: targetUserId,
+                senderUserId: socket.id,
+                message: input.val(),
+            });
+            input.val('');
+        }
+    });
+
+    socket.on('private message', function (data) {
+        console.log('private chat4 >>>',data);
+        var messageClass = data.senderUserId === socket.id ? 'right-message' : 'left-message';
+        var receiverUserId = data.senderUserId === socket.id ? data.targetUserId : 'you';
+        messages.append($('<li>').text(`${data.message} [${data.receiverUserId}]`).addClass(messageClass));
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+});
+
+    </script>
+    <!-- <script>
+        $(function () {
+            const socket = io();
+            const form = $('form');
+            const input = $('#m');
+            const messages = $('#messages');
+
+            form.submit(function(e){
+                e.preventDefault();
+                if (input.val()) {
+                    // socket.emit('chat message', input.val());
+                   var userid = socket.id === socket.id ?'aaaa':'bbbbbb';
+                    socket.emit('chat message', { id: socket.id, message: input.val() });
+                    input.val('');
+                }
+            });
+
+            socket.on('chat message', function(data){
+                // messages.append($('<li>').text(msg)); //first show
+                // messages.append($('<li>').text(`[${data.id}] ${data.message}`)); //second show
+                var messageClass = data.id !== 'yourUserId' ? 'right-message' : 'left-message';
+                var usercheck = data.id !== 'yourUserId' ? data.id : 'you';
+                // alert(usercheck);
+                // alert(messageClass);
+                messages.append($('<li>').text(`${data.message} [${usercheck}]`).addClass(messageClass));
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+        });
+    </script> -->
+</body>
+</html>

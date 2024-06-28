@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from demo.riktheme.com/fojota/side-menu/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Mar 2024 10:01:07 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver
+
+
+    </title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<body class="login-area">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="main-content- h-100vh">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-sm-10 col-md-10 col-lg-10">
+                    <!-- Middle Box -->
+                    <div class="middle-box">
+                        <div class="card-body">
+                            <div class="log-header-area card p-4 mb-4 text-center">
+                                <h5>Welcome </h5>
+                                <p class="mb-0">Sign Up.</p>
+                                <!-- <% if (typeof msg !== 'undefined' && msg) { %>
+                                    <div class="alert alert-danger">
+                                        <%= msg %>
+                                    </div>
+                                <% } %> -->
+                                <% if (typeof req.query.msg !=='undefined' ) { %>
+                                    <div class="alert alert-danger" role="alert">
+                                        <%= req.query.msg %>
+                                    </div>
+                                    <% } %>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <form name="mentorForm" id="mentorForm" method="post" action="/mentor-signup"
+                                        enctype="multipart/form-data">
+                                        <h5 class="ct_fw_600 mb-4">Your Contact Information
+                                        </h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="firstname">First Name</label>
+                                                    <input class="form-control" type="text" name="firstname"
+                                                        id="firstname" placeholder="Enter First Name"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.firstname : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="lastname">Last Name</label>
+                                                    <input class="form-control" type="text" name="lastname"
+                                                        id="lastname" placeholder="Enter Last Name"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.lastname : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="emailaddress">Email address</label>
+                                                    <input class="form-control" type="email" name="email"
+                                                        id="emailaddress" placeholder="Enter email"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.email : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="phonenumber">Phone Number</label>
+                                                    <input class="form-control" type="text" name="phonenumber"
+                                                        id="phonenumber" placeholder="Enter Phone Number"
+                                                        value="<%= typeof req.query.PhoneNumber !== 'undefined' ? req.query.PhoneNumber : '' %>">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="branch">Branch</label>
+                                                    <input class="form-control" type="text" name="branch" id="branch"
+                                                        placeholder="Enter Branch"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.branch : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="collegename">College Name</label>
+                                                    <input class="form-control" type="text" name="collegename"
+                                                        id="collegename" placeholder="Enter College Name"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.collegename : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="address">Address</label>
+                                                    <input class="form-control" type="text" name="address" id="address"
+                                                        placeholder="Enter Address"
+                                                        value="<%= typeof req.query.address !== 'undefined' ? req.query.address : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="city">City</label>
+                                                    <input class="form-control" type="text" name="city" id="city"
+                                                        placeholder="Enter City"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.city : '' %>">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="zipcode">Zip Code</label>
+                                                    <input class="form-control" type="text" name="zipcode" id="zipcode"
+                                                        placeholder="Enter Zip Code"
+                                                        value="<%= typeof req.query.zipcode !== 'undefined' ? req.query.zipcode : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="dob">Date of Birth</label>
+                                                    <input class="form-control" type="date" name="dob" id="dob"
+                                                        max="<%= new Date().toISOString().slice(0, 10) %>"
+                                                        value="<%= typeof req.query.firstname !== 'undefined' ? req.query.dob : '' %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="password">Password</label>
+                                                    <div class="position-relative">
+                                                        <input type="password" name="password"
+                                                            class="form-control passwordIcon"
+                                                            placeholder="Enter Password">
+                                                        <i
+                                                            class="fa-regular toggle-password fa-eye-slash ct_pass_hide"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="text-muted" for="c_password">Confirm Password</label>
+                                                    <div class="position-relative">
+                                                        <input type="password" name="c_password"
+                                                            class="form-control passwordIcon"
+                                                            placeholder="Enter Confirm Password">
+                                                        <i
+                                                            class="fa-regular toggle-password fa-eye-slash ct_pass_hide"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <h5 class="ct_fw_600 mb-4">Your Experience</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="career">Career</label>
+                                                        <input class="form-control" type="text" name="career"
+                                                            id="career" placeholder="Enter Career"
+                                                            value="<%= typeof req.query.career !== 'undefined' ? req.query.career : '' %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="expertise">Expertise</label>
+                                                        <input class="form-control" type="text" name="expertise"
+                                                            id="expertise" placeholder="Enter Expertise"
+                                                            value="<%= typeof req.query.expertise !== 'undefined' ? req.query.expertise : '' %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="expertise">Have you Mentored
+                                                            before?
+                                                        </label>
+                                                        <div class="d-flex align-items-center gap-3 flex-wrap">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" value='yes' type="radio"
+                                                                    name="beforeMentored" id="flexRadioDefault1">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" value='no' type="radio"
+                                                                    name="beforeMentored" id="flexRadioDefault1">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="">How Long was your previous
+                                                            experience as a Mentor?
+                                                        </label>
+                                                        <input class="form-control" type="text" name="mentorExperince"
+                                                            id="mentorExperince" placeholder="Enter Mentor Experience"
+                                                            value="<%= typeof req.query.mentorExperince !== 'undefined' ? req.query.mentorExperince : '' %>">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="MentorName">Mentor Name</label>
+                                                        <input class="form-control" type="text" name="MentorName"
+                                                            id="MentorName" placeholder="Enter Mentor Name"
+                                                            value="<%= typeof req.query.MentorName !== 'undefined' ? req.query.MentorName : '' %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="expertise">Initial Contact with
+                                                            Mentor:
+
+                                                        </label>
+                                                        <input class="form-control" type="text" name="contactWithMentor"
+                                                            id="contactWithMentor"
+                                                            placeholder="Enter Contact with Mentor"
+                                                            value="<%= typeof req.query.contactWithMentor !== 'undefined' ? req.query.contactWithMentor : '' %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="fileUpload">Upload File</label>
+                                                        <input class="form-control" type="file" name="profile"
+                                                            id="fileUpload">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="daysTimes">Additional information
+                                                            you would like us to know:
+                                                        </label>
+                                                        <textarea class="form-control" rows="4" name="additionalInfo"
+                                                            id="additionalInfo"
+                                                            value="<%= typeof req.query.additionalInfo !== 'undefined' ? req.query.additionalInfo : '' %>"
+                                                            placeholder="Enter Additional information"></textarea>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="expertise">Additional Resources
+                                                            that You Can Share (Scholarships, Internships, etc):
+                                                        </label>
+                                                        <input class="form-control" type="text" name="additionalResorce"
+                                                            id="additionalResorce"
+                                                            placeholder="Enter Additional Resource"
+                                                            value="<%= typeof req.query.additionalResorce !== 'undefined' ? req.query.additionalResorce : '' %>">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <h5 class="ct_fw_600 mb-4">Your Availability
+                                            </h5>
+
+                                            <div class="row">
+                                                <h6>Select Date</h6>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="totalHours">From</label>
+                                                        <input class="form-control" type="date" name="dateFrom"
+                                                            id="totalHours" placeholder="Enter Total Hours">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="totalHours">To</label>
+                                                        <input class="form-control" type="date" name="dateTo"
+                                                            id="totalHours" placeholder="Enter Total Hours">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h6>Select Time</h6>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="daysTimes">From</label>
+                                                        <input type="time" class="form-control" name="daysTimesFrom"
+                                                            id="daysTimeFrom"
+                                                            placeholder="Enter Days and Times Available">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="text-muted" for="daysTimes">To</label>
+                                                        <input type="time" class="form-control" name="daysTimesTo"
+                                                            id="daysTimeTo"
+                                                            placeholder="Enter Days and Times Available">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- New Fields -->
+                                        <!-- <div class="form-group mb-3">
+                                            <label class="text-muted" for="beforeMentored">Before Mentored</label>
+                                            <input class="form-control" type="text" name="beforeMentored"
+                                                id="beforeMentored" placeholder="Enter if you have been mentored before"
+                                                value="<%= typeof req.query.beforeMentored !== 'undefined' ? req.query.beforeMentored : '' %>">
+                                        </div> -->
+
+
+
+
+
+                                        <!-- <div class="form-group mb-3">
+                                            <label class="text-muted" for="contactWithMentor">Contact with
+                                                Mentor</label>
+                                            <input class="form-control" type="text" name="contactWithMentor"
+                                                id="contactWithMentor" placeholder="Enter Contact with Mentor"
+                                                value="<%= typeof req.query.contactWithMentor !== 'undefined' ? req.query.contactWithMentor : '' %>">
+                                        </div> -->
+
+                                        <!-- <div class="form-group mb-3">
+                                            <label class="text-muted" for="additionalInfo">Additional
+                                                Information</label>
+                                            <input class="form-control" type="text" name="additionalInfo"
+                                                id="additionalInfo" placeholder="Enter Additional Information"
+                                                value="<%= typeof req.query.additionalInfo !== 'undefined' ? req.query.additionalInfo : '' %>">
+                                        </div> -->
+
+
+
+
+
+
+                                        <!-- End of New Fields -->
+
+                                        <div class="form-group my-3">
+                                            <button class="ct_custom_btn ct_fw_500 btn-lg mx-auto d-block mt-4"
+                                                type="submit">Sign
+                                                Up</button>
+                                        </div>
+                                        <div class="form-group my-3 text-center">
+                                            <a href="/mentor-login" class="btn-lg w-100 text-dark">Already have an
+                                                account? Sign
+                                                In</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.1/dist/jquery.validate.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+</body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dobInput = document.getElementById('dob');
+
+        // Calculate the date 13 years ago from today
+        const today = new Date();
+        const minDate = new Date(today.getFullYear() - 13, today.getMonth(), today.getDate());
+
+        // Set the min attribute to the calculated date
+        dobInput.min = minDate.toISOString().slice(0, 10);
+
+        // Set the max attribute to today's date
+        dobInput.max = today.toISOString().slice(0, 10);
+
+        // Optionally, you can add a message or tooltip to inform users about the age restriction
+        dobInput.title = 'You must be at least 13 years old.';
+    });
+
+    // document.getElementById('dob').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
+    window.localStorage.clear();
+
+    var form = $('#mentorForm');
+    form.validate({
+        ignore: [],
+        debug: false,
+        rules: {
+            firstname: {
+                required: true,
+            },
+            lastname: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phonenumber: {
+                required: true,
+                number: true
+            },
+            branch: {
+                required: true,
+            },
+            collegename: {
+                required: true,
+            },
+            address: {
+                required: true,
+            },
+            city: {
+                required: true,
+            },
+            zipcode: {
+                required: true
+            },
+            password: {
+                required: true
+            },
+            c_password: {
+                required: true
+            },
+            career: {
+                required: true
+            },
+            expertise: {
+                required: true
+            },
+            mentorExperince: {
+                required: true
+            },
+            MentorName: {
+                required: true
+            },
+            contactWithMentor: {
+                required: true
+            },
+            // additionalInfo:{
+            //     required:true
+            // },
+            // additionalResorce:{
+            //     opti:true
+            // },
+            dateFrom: {
+                required: true
+            },
+            dateTo: {
+                required: true
+            },
+            daysTimesFrom: {
+                required: true
+            },
+            daysTimesTo: {
+                required: true
+            },
+            profile: {
+                required: true
+            }
+        },
+        messages: {
+            firstname: 'Please enter first name.',
+            lastname: 'Please enter last name',
+            email: {
+                required: "Please enter email.",
+                email: "Please enter valid email"
+            },
+            phonenumber: {
+                required: "Please enter phone number.",
+                number: "phone number must be a number",
+            },
+            branch: 'Please enter branch',
+            collegename: 'Please enter college name.',
+            address: 'Please enter your address',
+            city: {
+                required: "Please enter city.",
+
+            },
+            zipcode: {
+                required: "Please enter zipcode.",
+            },
+            dob: {
+                required: "Please enter your dob"
+            },
+            password: {
+                required: "Please enter your password"
+            },
+            c_password: {
+                required: "Please enter your confirm password"
+            },
+            career: {
+                required: "Please enter your career"
+            },
+            expertise: {
+                required: "Please enter your expertise"
+            },
+            mentorExperince: {
+                required: "Please enter your experience"
+            },
+            MentorName: {
+                required: "Please enter your mentor name"
+            },
+            contactWithMentor: {
+                required: "Please enter your contact with mentor"
+            },
+            // additionalInfo:{
+            //     required:"Please enter your additional information"
+            // },
+            // additionalResorce:{
+            //     required:"Please enter your additional resorce"
+            // },
+            dateFrom: {
+                required: "Please enter from date"
+            },
+            dateTo: {
+                required: "This field are required"
+            },
+            daysTimesFrom: {
+                required: "Please enter from time"
+            },
+            daysTimesTo: {
+                required: "This field are required"
+            },
+            profile: {
+                required: "File must be required"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "description") {
+                error.appendTo(element.parent());
+            } else if (element.attr("name") == "address") {
+                error.appendTo($('#address').parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+</script>
+<!-- <script>
+    $(document).ready(function () {
+        function enforce24HourFormat(element) {
+            var timeValue = element.val();
+
+            // Validate and enforce 24-hour format
+            var timeParts = timeValue.split(':');
+            var hours = parseInt(timeParts[0], 10);
+            var minutes = parseInt(timeParts[1], 10);
+
+            if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+                alert('Invalid time format. Please enter a valid 24-hour time.');
+                element.val('');
+                return;
+            }
+
+            // Format hours and minutes to always be 2 digits
+            var formattedHours = hours.toString().padStart(2, '0');
+            var formattedMinutes = minutes.toString().padStart(2, '0');
+
+            // Update the input value to the formatted time
+            element.val(`${formattedHours}:${formattedMinutes}`);
+        }
+
+        $('#daysTimeFrom, #daysTimeTo').on('change', function () {
+            enforce24HourFormat($(this));
+        });
+    });
+
+</script> -->
+<!-- Mirrored from demo.riktheme.com/fojota/side-menu/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Mar 2024 10:01:07 GMT -->
+
+</html>

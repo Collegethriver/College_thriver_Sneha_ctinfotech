@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Simple Chat App</title>
+    <style>
+        /* Add your styles for left and right messages here */
+        .left-message {
+            text-align: left;
+            color: blue;
+        }
+
+        .right-message {
+            text-align: right;
+            color: green;
+        }
+
+        #messages{
+            list-style-type:none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="messages"></ul>
+    <form id="form" action="" style="text-align-last: right;">
+        <input type="text" id="m" autocomplete="off" /><button>Send<%= msg %></button>
+    </form>
+    
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(function () {
+            const socket = io();
+            const form = $('form');
+            const input = $('#m');
+            const messages = $('#messages');
+
+            form.submit(function(e){
+                e.preventDefault();
+                if (input.val()) {
+                //    var userid = socket.id === socket.id ?'aaaa':'bbbbbb';
+                    const reciver = ""
+                    socket.emit('viewpage message', { id: socket.id, message: input.val(), ameen:"<%= msg %>" });
+                    input.val('');
+                }
+            });
+
+            socket.on('chat message', function(data){
+                console.log("Chat Msg",data.ameen);
+                var messageClass = data.id === socket.id ? 'right-message' : 'left-message';
+                var usercheck = data.id !== socket.id ? 'otherUser' : 'you';
+                if(data.id === socket.id){
+                     messages.append($('<li>').text(`${data.message} [${usercheck}]`).addClass(messageClass));
+                }else{
+                    messages.append($('<li>').text(`[${usercheck}] ${data.message} `).addClass(messageClass));
+                }
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+        });
+    </script>
+</body>
+</html>

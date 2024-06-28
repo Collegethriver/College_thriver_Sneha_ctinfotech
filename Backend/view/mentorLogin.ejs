@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from demo.riktheme.com/fojota/side-menu/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Mar 2024 10:01:07 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver</title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+<style>
+    .error{
+        color:red;
+    }
+</style>
+<body class="login-area">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="main-content- h-100vh">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-sm-10 col-md-7 col-lg-5">
+                    <!-- Middle Box -->
+                    <div class="middle-box">
+                        <div class="card-body">
+                            <div class="log-header-area card p-4 mb-4 text-center">
+                                <h5>Welcome Back!</h5>
+                                <p class="mb-0">Sign in to continue.</p>
+                                <% if (typeof msg !=='undefined' && msg) { %>
+                                    <div class="alert alert-danger">
+                                        <%= msg %>
+                                    </div>
+                                    <% } %>
+                            </div>
+
+
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <form name="mentorForm" id="mentorForm" method="post" action="/mentor">
+                                        <div class="form-group mb-3">
+                                            <label class="text-muted" for="emailaddress">Email address</label>
+                                            <input class="form-control" type="email" name="email" id="emailaddress"
+                                                placeholder="Enter email">
+                                        </div>
+
+                                        <div class="form-group mb-1">
+                                            <label class="text-muted" for="password">Password</label>
+                                            <div class="position-relative">
+                                                <input type="password" name="password" class="form-control passwordIcon"
+                                                    maxlength="16" placeholder="Enter Password">
+                                                <i class="fa-regular toggle-password fa-eye-slash ct_pass_hide"></i>
+                                                <!-- <span style="color:red;"><%= msg %></span> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <button class="ct_custom_btn ct_fw_500 btn-lg w-100" type="submit">Sign
+                                                In</button>
+                                        </div>
+                                        <div class="form-group my-3">
+                                            <a href="/mentor-signup" class="btn-lg w-100">Don't have an account? Sign
+                                                Up</a>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+    <script>
+        function validatePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+
+            const password = passwordInput.value;
+            if (password.length > 16) {
+                passwordError.style.display = 'block';
+                passwordInput.value = password.substring(0, 16); // Trim the password to the max length
+            } else {
+                passwordError.style.display = 'none';
+            }
+        }
+    </script>
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+
+    <!-- <script>
+        // Connect to your server's socket.io instance
+        const socket = io("http://your-server-url");
+
+        // Function to emit mentor login event
+        function emitMentorLogin() {
+            // Get mentor email and password from the login form
+            const email = document.getElementById("emailaddress").value;
+            const password = document.getElementById("password").value;
+
+            // Send mentor email and password to the server for authentication
+            fetch("/mentor-login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // If authentication is successful, emit mentorLoggedIn event with mentor ID
+                    const mentorId = data.mentorId; // Assuming the server sends back mentor ID upon successful login
+                    socket.emit("mentorLoggedIn", mentorId);
+                } else {
+                    // Handle login failure
+                    console.error("Login failed:", data.message);
+                    // Display error message to the user
+                    // For example, show an alert or update a message on the login form
+                }
+            })
+            .catch(error => {
+                console.error("Error during mentor login:", error);
+                // Handle error, display error message to the user if needed
+            });
+        }
+
+        // Call emitMentorLogin function when the login form is submitted
+        document.getElementById("mentorForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            emitMentorLogin(); // Emit mentor login event and handle authentication
+            // Do not submit the form here, it will be submitted inside emitMentorLogin function after authentication
+        });
+    </script> -->
+
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.1/dist/jquery.validate.min.js"></script>
+</body>
+<script>
+    window.localStorage.clear();
+    var form = $('#mentorForm');
+    form.validate({
+        ignore: [],
+        debug: false,
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            
+            password:{
+                required:true
+            }
+        },
+        messages: {
+            email: {
+                required: "Please enter email.",
+                email: "Please enter valid email"
+            },
+            password:{
+                required:"Please enter your password"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "description") {
+                error.appendTo(element.parent());
+            } else if (element.attr("name") == "address") {
+                error.appendTo($('#address').parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+</script>
+
+<!-- Mirrored from demo.riktheme.com/fojota/side-menu/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Mar 2024 10:01:07 GMT -->
+
+</html>

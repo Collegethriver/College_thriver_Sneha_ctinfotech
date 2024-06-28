@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver</title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+
+
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="#"><img class="desktop-logo" src="<%= baseurl %>mentorpanel/img/core-img/logo.png"
+                        alt="Desktop Logo"> <img class="small-logo"
+                        src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu">
+                            <li class="treeview active">
+                                <a class="menu-active" href="#">
+                                    <i class="bi bi-chat-left-text-fill"></i>
+                                    <span>Mentor Chat</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between ">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="#"><img src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class="bi bi-list"></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class="bi bi-list"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Top Notifications Area -->
+                                <div class="top-notifications-area">
+                                    <!-- Heading -->
+                                    <div class="notifications-heading">
+                                        <div class="heading-title">
+                                            <h6>Notifications</h6>
+                                        </div>
+                                        <span>1</span>
+                                    </div>
+
+                                    <div class="notifications-box" id="notificationsBox">
+                                        <a href="#" class="dropdown-item">
+
+                                            <div>
+                                                <span>Consectetur adipisicing</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> <img
+                                    src="<%= baseurl %>profile/<%= mentordata[0].profile_image %>" alt=""></button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="/mentorprofile/<%= session.mentor_Id %>" class="dropdown-item"><i
+                                            class="bx bx-user font-15" aria-hidden="true"></i> My profile</a>
+                                    <!-- <a href="/mentor-editprofile" class="dropdown-item"><i class="bx bx-wallet font-15"
+                                            aria-hidden="true"></i>Edit Profile</a> -->
+                                    <a href="/changepassword/<%= session.mentor_Id %>" class="dropdown-item"><i
+                                            class="bx bx-wrench font-15" aria-hidden="true"></i> Change Password</a>
+                                    <a href="/logout" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content mt-5">
+                <div class="content-wraper-area">
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body card-breadcrumb">
+                                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                                            <h4 class="mb-0">Mentor Chat </h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-xxl-4">
+                                <div class="chat-box-left">
+
+
+                                    <div class="chat-search mb-2">
+                                        <div class="form-group">
+                                            <input type="text" name="chat-search" class="form-control"
+                                                placeholder="Search">
+                                            <button type="button" class="btn search-btn"><i
+                                                    class='bx bx-search-alt-2'></i></button>
+                                        </div>
+                                    </div>
+                                    <!--end chat-search-->
+
+                                    <div class="chat-body-left">
+                                        <div>
+                                            <div>
+                                                <div class="single-chat-list" id="HotChat-list">
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+                                                            <span class="round-50 bg-success"></span>
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Daniel Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>02 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-3.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+                                                            <span class="round-50 bg-danger"></span>
+
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Jhon Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>07 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+                                                            <span class="round-50 bg-success"></span>
+
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Ajoy Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>10 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-3.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+                                                            <span class="round-50 bg-danger"></span>
+
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Daniel Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>22 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+                                                            <span class="round-50 bg-danger"></span>
+
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Daniel Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>02 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- Single Chat -->
+                                                    <a href="#"
+                                                        class="chat-media d-flex align-items-center new-message">
+                                                        <div class="chat-user-img">
+                                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/per-3.jpg"
+                                                                alt="user" class="rounded-circle thumb-md">
+
+                                                        </div>
+                                                        <div class="chat-media-body d-flex justify-content-between">
+                                                            <div class="chat-user-info">
+                                                                <h6>Daniel Madsen</h6>
+                                                                <p>Good morning! Congratulations Friend...
+                                                                </p>
+                                                            </div>
+                                                            <div class="chat-time">
+                                                                <span>28 min</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 col-xxl-8">
+                                <div class="chat-box-right">
+                                    <div class="chat-header">
+                                        <a href="#" class="chat-user-heade d-flex align-items-center">
+                                            <div class="chat-media-left">
+                                                <img src="<%= baseurl %>mentorpanel/img/bg-img/person_1.jpg" alt="user"
+                                                    class="rounded-circle thumb-sm">
+                                                <span class="round-50 bg-danger"></span>
+                                            </div><!-- media-left -->
+                                            <div class="chat-main-user">
+                                                <h6 class="m-0">Mary Schneider</h6>
+                                                <p class="mb-0">Last seen: 2 hours ago</p>
+                                            </div>
+                                        </a>
+                                        <div class="chat-features">
+
+                                            <a class="alert alert-danger px-2 py-1" href="#"><i
+                                                    class="bi bi-trash"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-body">
+                                        <div class="chat-detail" id="chatBody">
+                                            <div class="single-chat-details-list d-flex align-items-center">
+                                                <div class="single-chat-user">
+                                                    <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg" alt="user"
+                                                        class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="single-chat-media-body">
+                                                    <div class="chat-msg">
+                                                        <div class="chat-body-time">9:02am</div>
+                                                        <p>Hello,</p>
+                                                        <p class="mb-0">There are many variations of passages of
+                                                            Lorem Ipsum available.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="single-chat-details-list reverse d-flex align-items-center">
+                                                <div class="single-chat-user">
+                                                    <img src="<%= baseurl %>mentorpanel/img/bg-img/person_1.jpg"
+                                                        alt="user" class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="single-chat-media-body">
+                                                    <div class="chat-msg">
+                                                        <div class="chat-body-time">9:02am</div>
+                                                        <p>Good Morning !</p>
+                                                        <p class="mb-0">There are many variations of passages of
+                                                            Lorem Ipsum available.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="single-chat-details-list d-flex align-items-center">
+                                                <div class="single-chat-user">
+                                                    <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg" alt="user"
+                                                        class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="single-chat-media-body">
+                                                    <div class="chat-body-time">9:02am</div>
+                                                    <div class="chat-msg">
+                                                        <p>Good Morning !</p>
+                                                        <p class="mb-0">There are many variations of passages of
+                                                            Lorem Ipsum available.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-footer">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <textarea class="form-control chat-field" name="" id="chatbox"
+                                                        placeholder="Type something here..."></textarea>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="d-flex justify-content-end chat-features bottom">
+                                                            <label for="send_image">
+                                                                <a
+                                                                    class="btn btn-circle text-white ms-1 btn-info btn-sm"><i
+                                                                        class="bi bi-paperclip"></i></a>
+                                                                <input type="file" name="" class="d-none"
+                                                                    id="send_image">
+                                                            </label>
+                                                        </div>
+                                                        <div class="d-flex justify-content-end chat-features bottom">
+                                                            <a class="btn btn-circle text-white ms-1 btn-info btn-sm"
+                                                                href="#"><i class="bi bi-send"></i></a>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-center">
+                                <!-- Copywrite Text -->
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; <a href="https://college-thriver.org/"
+                                            target="_blank">Collage Thriver</a></p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+
+</body>
+<script>
+    // console.log(">>>>>>>>>>>>>>>>>>",window.localStorage.getItem('user_token'));
+    if (window.localStorage.getItem('user_token') == null) {
+        var token = "<%= token %>";
+        console.log('Token:', token);
+        window.localStorage.setItem('user_token', token);
+    }
+
+</script>
+
+</html>

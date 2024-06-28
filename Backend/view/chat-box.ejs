@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College Thriver</title>
+    <link rel="icon" href="<%= baseurl %>mentorpanel/img/core-img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/animate.css">
+    <link rel="stylesheet" href="<%= baseurl %>mentorpanel/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<style>
+    .chat-field {
+        height: 38px;
+        border-radius: 5px;
+        font-size: 13px;
+        overflow: hidden;
+    }
+
+    .slimScrollDiv {
+        height: calc(100vh - 380px) !important;
+    }
+
+    .chat-box-left {
+        overflow-y: auto;
+        height: calc(100vh - 270px);
+    }
+
+    .single-chat-list a {
+        padding-block: 10px;
+    }
+
+    .right-side-navbar .nav-item.dropdown .btn>img {
+        top: 0px;
+        height: 31px;
+        object-fit: cover;
+    }
+
+    .single-chat-details-list {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-sm.btn-circle {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div#chatBody {
+        height: calc(100vh - 447px) !important;
+        overflow-y: auto !important;
+    }
+
+    div#chatBody::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    .chat-box-left::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .chat-box-right {
+        background-color: rgb(136 105 172 / 10%);
+    }
+
+    .chat-box-left::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    .chat-box-left::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    .chat-box-left::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Track */
+    div#chatBody::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    div#chatBody::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    .chat-main-user {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .chat-main-user img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+
+    /* Handle on hover */
+    div#chatBody::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .chat-box-right .chat-footer {
+        border-radius: 0px 0px 16px 16px;
+    }
+</style>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="#"><img class="desktop-logo" src="<%= baseurl %>mentorpanel/img/core-img/logo.png"
+                        alt="Desktop Logo"> <img class="small-logo"
+                        src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu">
+                            <li class="treeview active">
+                                <a class="menu-active" href="#">
+                                    <i class="bi bi-chat-left-text-fill"></i>
+                                    <span>Mentor Chat</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content pt-5">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between ">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="#"><img src="<%= baseurl %>mentorpanel/img/core-img/logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class="bi bi-list"></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class="bi bi-list"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+                        <li class="nav-item dropdown">
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Top Notifications Area -->
+                                <div class="top-notifications-area">
+                                    <!-- Heading -->
+                                    <div class="notifications-heading">
+                                        <div class="heading-title">
+                                            <h6>Notifications</h6>
+                                        </div>
+                                        <span>1</span>
+                                    </div>
+
+                                    <div class="notifications-box" id="notificationsBox">
+                                        <a href="#" class="dropdown-item">
+                                            <div>
+                                                <span>Consectetur adipisicing</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> <img
+                                    src="<%= baseurl %>profile/<%= mentordata[0].profile_image %>" alt=""></button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="/mentorprofile/<%= mentordata[0].id %>" class="dropdown-item"><i
+                                            class="bx bx-user font-15" aria-hidden="true"></i> My profile</a>
+                                    <a href="/changepassword/<%= mentordata[0].id %>" class="dropdown-item"><i
+                                            class="bx bx-wrench font-15" aria-hidden="true"></i> Change Password</a>
+                                    <a href="/logout" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content mt-5">
+                <div class="content-wraper-area">
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body card-breadcrumb">
+                                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                                            <h4 class="mb-0">Mentor Chat </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-xxl-4">
+                                <div class="chat-box-left">
+                                    <div class="chat-search mb-2">
+                                        <div class="form-group">
+                                            <input type="text" name="chat-search" class="form-control"
+                                                placeholder="Search" onkeyup="getValue(this.value)">
+                                            <button type="button" class="btn search-btn"><i
+                                                    class='bx bx-search-alt-2'></i></button>
+                                        </div>
+                                    </div>
+
+                                    <!-- User List -->
+                                    <div class="chat-body-left">
+                                        <div>
+                                            <div>
+                                                <div class="single-chat-list" id="HotChat-list">
+                                                    <!-- User List Items -->
+                                                    <% result.forEach(function(chat) { %>
+                                                        <a href="#"
+                                                            class="chat-media d-flex align-items-center new-message"
+                                                            user_id="<%= chat.id %>" onclick="selectUser('<%= chat.user.name %>','<%= chat.user_id %>','<%= chat.user.profile_image %>',
+                                                            '<%= chat.id %>','<%= chat.mentor_id %>'
+                                                        )">
+                                                            <div class="chat-user-img">
+                                                                <img src="<%= chat.user.profile_image %>" alt="user"
+                                                                    class="rounded-circle thumb-sm">
+                                                                <span class="round-50 <%= chat.status %>"></span>
+                                                            </div>
+                                                            <div class="chat-media-body d-flex justify-content-between">
+                                                                <div class="chat-user-info">
+                                                                    <h6 class="chat-user-name">
+                                                                        <%= chat.user.name %>
+                                                                    </h6>
+                                                                    <p>
+                                                                        <%= chat.message %>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="chat-time">
+                                                                    <span>
+                                                                        <%= chat.time %>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <% }); %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-7 col-xxl-8">
+                                <div class="chat-box-right" style="display: none;">
+                                    <div class="chat-header">
+                                        <div class="chat-main-user">
+                                            <img src="<%= baseurl %>mentorpanel/img/bg-img/person_1.jpg" alt="user"
+                                                class="rounded-circle thumb-sm click_userimage">
+                                            <h6 class="m-0"></h6>
+                                        </div>
+                                        <div class="chat-features">
+                                            <a class="text-danger px-2 py-1" style="display: block;" href="#"><i
+                                                    class="bi bi-trash"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-body">
+                                        <div class="chat-detail" id="chatBody">
+                                            <!-- Chat messages will be displayed here -->
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-footer">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <textarea class="form-control chat-field" name="" id="chatbox"
+                                                        placeholder="Type something here..."></textarea>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="d-flex justify-content-end chat-features bottom">
+                                                            <!-- <label for="send_image" class="mb-0">
+                                                                <a
+                                                                    class="btn btn-circle text-white ms-1 btn-info btn-sm"><i
+                                                                        class="bi bi-paperclip"></i></a>
+                                                                <input type="file" name="" class="d-none"
+                                                                    id="send_image">
+                                                            </label> -->
+                                                        </div>
+                                                        <div class="d-flex justify-content-end chat-features bottom">
+                                                            <a class="btn btn-circle text-white ms-1 btn-info btn-sm"
+                                                                href="#"><i class="bi bi-send"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-center">
+                                <!-- Copywrite Text -->
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; <a href="https://college-thriver.org/"
+                                            target="_blank">Collage Thriver</a></p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <script src="<%= baseurl %>mentorpanel/js/jquery.min.js"></script>
+    <script src="<%= baseurl %>mentorpanel/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/setting.js"></script> -->
+    <script src="<%= baseurl %>mentorpanel/js/scrool-bar.js"></script>
+    <!-- <script src="<%= baseurl %>mentorpanel/js/todo-list.js"></script> -->
+
+    <!-- Active JS -->
+    <script src="<%= baseurl %>mentorpanel/js/active.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" crossorigin="anonymous"></script>
+
+
+
+    <script>
+        function getValue(val) {
+            document.querySelectorAll('.chat-media').forEach(item => {
+                const userName = item.querySelector('.chat-user-name').textContent.toLowerCase();
+                console.log('userName>>>>>>>>>>>>>>>>>>>>>>>',userName.includes(val.toLowerCase()));
+                if (userName.includes(val.toLowerCase())) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //   // Initialize the Socket.IO client
+        //   const socket = io();
+
+        //   // Listen for 'new-message' event
+
+        //   socket.emit('join', { userId: '3' });
+
+        //   socket.on('new-message', (data) => {
+        //     const chatBody = document.getElementById('chatBody');
+        //     const newMessage = document.createElement('div');
+        //     newMessage.classList.add('single-chat-details-list');
+        //     newMessage.textContent = `${data.sender}: ${data.message}`;
+        //     chatBody.appendChild(newMessage);
+        //   });
+        // });
+        // socket.on('new-message', (data) => {
+
+        //     console.log('data',data)
+        //     const chatBody = document.getElementById('chatBody');
+
+        //     const messageDiv = document.createElement('div');
+
+        //     const userId = document.querySelector('#chatBody').getAttribute('user_id');
+        //     data.sender_id = userId;
+
+        //     messageDiv.classList.add('single-chat-details-list');
+        //     messageDiv.innerHTML = `
+        //     <div class="single-chat-user">
+        //         <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg" alt="user" class="rounded-circle thumb-sm">
+        //     </div>
+        //     <div class="single-chat-media-body">
+        //         <div class="chat-msg">
+        //             <div class="chat-body-time">${new Date().toLocaleTimeString()}</div>
+        //             <p>${data.message}</p>
+        //         </div>
+        //     </div>
+        // `;
+        //     chatBody.appendChild(messageDiv);
+        // });
+
+        var users_id;
+        var chat_ids;
+        function selectUser(userName, user_id, profile_image, chat_id, mentor_id) {
+
+            // Set the selected user's name in the chat header
+            users_id = user_id
+
+            chat_ids = chat_id
+            console.log(profile_image, "profile_image")
+            var elements = document.getElementsByClassName('click_userimage');
+
+            const chatBody = document.getElementById('chatBody');
+            let element;
+            while (element = chatBody.querySelector('.single-chat-details-list')) {
+                element.remove();
+            }
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].src = profile_image;
+            }
+
+            fetch('/all_messages/' + chat_id)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle API response data
+                    data.messages.forEach(item => {
+
+                        const messageDiv = document.createElement('div');
+                        const userId = document.querySelector('#chatBody').getAttribute('user_id');
+                        data.userId = userId;
+                        if (item.isMentor == 0) {
+                            messageDiv.classList.add('single-chat-details-list');
+                            messageDiv.innerHTML = ` <div class="single-chat-user">
+                                                    <img src="`+ profile_image + `" alt="user" class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="single-chat-media-body">
+                                                    <div class="chat-msg">
+                                                        <div class="chat-body-time">${new Date(item.createdOn).toLocaleTimeString()}</div>
+                                                        <p>${item.content}</p>
+                                                    </div>
+                                                </div>
+                                            `;
+                            chatBody.appendChild(messageDiv);
+
+                        }
+
+                        if (item.isMentor == 1) {
+                            messageDiv.classList.add('single-chat-details-list');
+                            messageDiv.classList.add('reverse');
+                            messageDiv.classList.add('d-flex');
+                            messageDiv.innerHTML = `<div class="single-chat-user">
+                                                <img src="<%= baseurl %>/profile/<%= mentordata[0].profile_image %>" alt="user" class="rounded-circle thumb-sm">
+                                            </div>
+                                            <div class="single-chat-media-body">
+                                                <div class="chat-msg">
+                                                    <div class="chat-body-time">${new Date(item.createdOn).toLocaleTimeString()}</div>
+                                                    <p>${item.content}</p>
+                                                </div>
+                                            </div>`;
+                            chatBody.appendChild(messageDiv);
+                        }
+
+
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error fetching API:', error);
+                });
+
+            document.querySelector('.chat-main-user h6').innerText = userName;
+
+            document.querySelector('#chatbox').setAttribute('user_id', user_id);
+
+            document.querySelector('.chat-box-right').style.display = 'block';
+
+            const socket = io();
+
+            // Listen for 'new-message' event
+
+            socket.emit('join', { userId: '<%= mentordata[0].id %>' });
+
+            socket.on('new-message', (data) => {
+                const chatBody = document.getElementById('chatBody');
+                const messageDiv = document.createElement('div');
+
+                messageDiv.classList.add('single-chat-details-list');
+                messageDiv.innerHTML = `<div class="single-chat-user">
+                                        <img src="`+ profile_image + `" alt="user" class="rounded-circle thumb-sm">
+                                    </div>
+                                    <div class="single-chat-media-body">
+                                        <div class="chat-msg">
+                                            <div class="chat-body-time">${new Date().toLocaleTimeString()}</div>
+                                            <p>${data.message}</p>
+                                        </div>
+                                    </div>`;
+                chatBody.appendChild(messageDiv);
+            });
+
+
+
+
+        }
+
+        // Connect to the Socket.IO server
+
+
+        // Handle sending messages
+        const chatInput = document.getElementById('chatbox');
+        const sendButton = document.querySelector('.bi-send');
+
+        sendButton.addEventListener('click', () => {
+
+            const message = chatInput.value.trim();
+            chatInput.value = '';
+
+            if (message !== '') {
+
+                fetch('/send_message/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Specify the content type
+                    },
+                    // Optionally, include a request body
+                    body: JSON.stringify({
+                        "chat_id": chat_ids,
+                        "sender_id": users_id,
+                        "isMentor": 1,
+                        "content": message
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle API response data
+                        if (data.success) {
+
+                            const chatBody = document.getElementById('chatBody');
+                            const messageDiv = document.createElement('div');
+                            const userId = document.querySelector('#chatBody').getAttribute('user_id');
+                            messageDiv.classList.add('single-chat-details-list');
+                            messageDiv.classList.add('reverse');
+                            messageDiv.classList.add('d-flex');
+                            messageDiv.innerHTML = `<div class="single-chat-user">
+                                  <img src="<%= baseurl %>/profile/<%= mentordata[0].profile_image %>" alt="user" class="rounded-circle thumb-sm">
+                                </div>
+                                <div class="single-chat-media-body">
+                                    <div class="chat-msg">
+                                        <div class="chat-body-time">${new Date().toLocaleTimeString()}</div>
+                                        <p>${message}</p>
+                                    </div>
+                                </div>`;
+                            chatBody.appendChild(messageDiv);
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Error fetching API:', error);
+                    });
+
+
+
+            }
+        });
+
+        // Handle receiving messages
+        // socket.on('new-message', (data) => {
+
+        //     const chatBody = document.getElementById('chatBody');
+
+        //     const messageDiv = document.createElement('div');
+
+        //     const userId = document.querySelector('#chatBody').getAttribute('user_id');
+        //     data.sender_id = userId;
+
+        //     messageDiv.classList.add('single-chat-details-list');
+        //     messageDiv.innerHTML = `
+        //     <div class="single-chat-user">
+        //         <img src="<%= baseurl %>mentorpanel/img/bg-img/per-2.jpg" alt="user" class="rounded-circle thumb-sm">
+        //     </div>
+        //     <div class="single-chat-media-body">
+        //         <div class="chat-msg">
+        //             <div class="chat-body-time">${new Date().toLocaleTimeString()}</div>
+        //             <p>${data.message}</p>
+        //         </div>
+        //     </div>
+        // `;
+        //     chatBody.appendChild(messageDiv);
+        // });
+
+        // Check if user token exists in local storage, if not, set it
+        if (window.localStorage.getItem('user_token') == null) {
+            var token = "<%= token %>";
+            var mentordata = "<%= mentordata[0].id %>";
+            console.log('Token:', mentordata);
+            window.localStorage.setItem('user_token', token);
+
+            window.localStorage.setItem('mentor_id', mentordata);
+            // const mentorId = window.localStorage.getItem('mentor_id')
+            // socket.join(mentorId);
+        }
+    </script>
+</body>
+
+</html>
