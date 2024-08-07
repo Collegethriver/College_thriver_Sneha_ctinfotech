@@ -5,6 +5,9 @@ const localStorage = new LocalStorage('./scratch');
 // console.log('token>>>>>>>>>>>>>>>>>>>',token);?
 const mentor_auth = (req, res, next) => {
     const token = req.session.mentortoken;
+    if (req.session.loggedOut) {
+        return res.redirect(`/mentor-login`);
+      }
     try {
         const decoded = jwt.verify(token, "your-secret-key");
         console.log('decoded>>>>>>>>', decoded);

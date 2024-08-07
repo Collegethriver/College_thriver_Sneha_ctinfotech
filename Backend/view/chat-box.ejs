@@ -268,7 +268,7 @@
                                     <div class="chat-search mb-2">
                                         <div class="form-group">
                                             <input type="text" name="chat-search" class="form-control"
-                                                placeholder="Search" onkeyup="getValue(this.value)">
+                                                placeholder="Search">
                                             <button type="button" class="btn search-btn"><i
                                                     class='bx bx-search-alt-2'></i></button>
                                         </div>
@@ -278,14 +278,16 @@
                                     <div class="chat-body-left">
                                         <div>
                                             <div>
-                                                <div class="single-chat-list" id="HotChat-list">
+                                                <div class="single-chat-list" id="
+
+HotChat-list">
                                                     <!-- User List Items -->
                                                     <% result.forEach(function(chat) { %>
                                                         <a href="#"
                                                             class="chat-media d-flex align-items-center new-message"
                                                             user_id="<%= chat.id %>" onclick="selectUser('<%= chat.user.name %>','<%= chat.user_id %>','<%= chat.user.profile_image %>',
-                                                            '<%= chat.id %>','<%= chat.mentor_id %>'
-                                                        )">
+                                                                '<%= chat.id %>','<%= chat.mentor_id %>'
+                                                            )">
                                                             <div class="chat-user-img">
                                                                 <img src="<%= chat.user.profile_image %>" alt="user"
                                                                     class="rounded-circle thumb-sm">
@@ -293,7 +295,7 @@
                                                             </div>
                                                             <div class="chat-media-body d-flex justify-content-between">
                                                                 <div class="chat-user-info">
-                                                                    <h6 class="chat-user-name">
+                                                                    <h6>
                                                                         <%= chat.user.name %>
                                                                     </h6>
                                                                     <p>
@@ -314,7 +316,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="col-md-7 col-xxl-8">
                                 <div class="chat-box-right" style="display: none;">
@@ -405,17 +406,7 @@
 
 
     <script>
-        function getValue(val) {
-            document.querySelectorAll('.chat-media').forEach(item => {
-                const userName = item.querySelector('.chat-user-name').textContent.toLowerCase();
-                console.log('userName>>>>>>>>>>>>>>>>>>>>>>>',userName.includes(val.toLowerCase()));
-                if (userName.includes(val.toLowerCase())) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+
 
         // document.addEventListener('DOMContentLoaded', (event) => {
         //   // Initialize the Socket.IO client

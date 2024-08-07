@@ -257,7 +257,7 @@ exports.mentorsignup = async (req, res) => {
       MentorName: Joi.string().required(),
       contactWithMentor: Joi.string().required(),
       additionalInfo: [Joi.string().empty().optional().allow('')],
-      additionalResorce:  [Joi.string().empty().optional().allow('')],
+      additionalResorce: [Joi.string().empty().optional().allow('')],
       dateFrom: Joi.string().required(),
       dateTo: Joi.string().required(),
       daysTimesFrom: Joi.string().required(),
@@ -365,8 +365,9 @@ exports.mentorlogin = async (req, res) => {
           const match = bcrypt.compareSync(password, userData[0]?.password);
           if (match) {
             // User authentication successful, generate JWT token
-            const token = jwt.sign({ userId: userData[0]?.id }, 'your-secret-key');
+            const token = jwt.sign({ userId: userData[0]?.id }, 'your-secret-key', { expiresIn: '24h' });
             req.session.mentortoken = token;
+            req.session.loggedOut = false;
             localStorage.setItem("mentortoken", token);
             const chats = await getDataWhere('chats', `where mentor_id=${userData[0]?.id}`);
             console.log('chats', chats);
@@ -588,9 +589,9 @@ exports.changepassword = async (req, res) => {
   try {
     console.log('req.params', req.params);
     // return false
-    let mentorsData = await mentorsProfile('mentors', { id: req.params.mentorsId });
-    console.log('mentorsData', mentorsData);
-    res.render(path.join(__dirname, '../view/', 'changePassword.ejs'), { baseurl: baseurl, mentordata: mentorsData, session: req.session, msg1: "", msg: "" });
+    let mentordata = await mentorsProfile('mentors', { id: req.params.mentorsId });
+    console.log('mentordata>>>>>>>>>>>>', mentordata);
+    res.render(path.join(__dirname, '../view/', 'changePassword.ejs'), { baseurl: baseurl, mentordata: mentordata, session: req.session, msg1: "", msg: "" });
   } catch (error) {
     return handleServerError(res, error);
   }
@@ -635,12 +636,13 @@ exports.updatementorPassword = async (req, res) => {
       if (isPasswordValid) {
         // Password is correct, proceed with password update
         const hashedPassword = bcrypt.hashSync(new_password, 10); // Hash new password
-        await mentorsUpdate('mentors', { password: hashedPassword }, { id: '3' });
-        req.session.message = 'Password updated successfully';
-        res.redirect(`/changepassword/${mentorId}`);
+        await mentorsUpdate('mentors', { password: hashedPassword }, { id: mentorId });
+        msg1 = 'Password updated successfully';
+        res.render(path.join(__dirname, '../view/', 'changePassword.ejs'), { baseurl: baseurl, mentordata: userData, msg1: 'Password updated successfully' });
       } else {
         // Password is incorrect, render view with error message
-        res.render(path.join(__dirname, '../view/', 'changePassword.ejs'), { baseurl: baseurl, msg: 'Current password is incorrect' });
+        req.session.message = 'Current password is incorrect'
+        res.render(path.join(__dirname, '../view/', 'changePassword.ejs'), { baseurl: baseurl, mentordata: userData, session: req.session, msg1: "", msg: "" });
       }
 
     }

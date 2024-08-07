@@ -10,24 +10,28 @@ const college = require("./routes/college");
 const session = require("express-session");
 const { initializeSocketIO } = require('./utils/socket')
 const { InsertData, GetDataById } = require("./models/commonmodel");
+const https = require("https");
+const fs = require("fs");
 
 const app = express();
 
-// Create an HTTP server and bind it with the Express app
-const server = http.createServer(app);
+const sslOptions = {
+  ca: fs.readFileSync("/var/www/html/ssl/ca_bundle.crt"),
+  key: fs.readFileSync("/var/www/html/ssl/private.key"),
+  cert: fs.readFileSync("/var/www/html/ssl/certificate.crt"),
+};
 
-// Initialize Socket.IO and configure CORS settings
-const io = socketIO(server, {
+// const server = http.createServer(app);
+const httpsServer = https.createServer(sslOptions, app);
+const io = socketIO(httpsServer, {
   cors: {
     origin: "*",
     credentials: true,
   },
 });
 
-// Make the Socket.IO instance available in the app
 app.set("io", io);
 
-// Set up event listeners for Socket.IO
 io.on('connection', (socket) => {
   console.log('A mentor connected', session);
 
@@ -38,29 +42,29 @@ io.on('connection', (socket) => {
     console.log(`User joined room: ${userId}`);
   });
 
-  // Handle socket disconnection
   socket.on('disconnect', () => {
     console.log('A mentor disconnected');
   });
 });
 
-// API endpoint to send a message to a specific room
+
 app.get('/sendMessage', (req, res) => {
-  const io = req.app.get('io'); // Get the Socket.IO instance
+  const io = req.app.get('io'); // Assuming you have access to the Socket.IO instance
   io.to("3").emit('new-message', {
     message: "this is the message"
   });
   return res.status(200).json({ success: true, message: 'Message sent successfully.' });
-});
+}
+)
 
-// Emit a message to a specific room after 5 seconds (for demonstration purposes)
+
 setTimeout(() => {
   io.to("3").emit('new-message', {
     message: "this is the message"
   });
-}, 5000);
+}, 5000); // Emit after 5 seconds for demonstration purposes
 
-// Configure session middleware
+
 app.use(
   session({
     secret: "your-secret-key", // Change this to a random string
@@ -69,8 +73,6 @@ app.use(
     cookie: { secure: false } ,
   })
 );
-
-// Configure middleware to parse URL-encoded and JSON request bodies
 app.use(
   express.urlencoded({
     extended: true,
@@ -79,22 +81,19 @@ app.use(
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-// Register route handlers
 app.use("/", register);
 app.use("/", user);
 app.use("/", mentor);
 app.use("/", activite);
 app.use("/", college);
 
-// Initialize Socket.IO for additional configurations
 initializeSocketIO(io);
 
-// Define the root route with CORS headers
 app.get("/", (req, res) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "*",
-    "http://34.48.5.10:4000",
+    "https://www.collegethriverapp.org:4000",
     {
       reconnect: true,
     }
@@ -106,7 +105,6 @@ app.get("/", (req, res) => {
     "Access-Control-Allow-Headers",
     "Content-Type,Accept, X-Custom-Header,Authorization"
   );
-
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   } else {
@@ -114,11 +112,10 @@ app.get("/", (req, res) => {
   }
 });
 
-// Start the server on the specified port
-const port = process.env.PORT || 4000; // Default port is 4000, but can be overridden by environment variable PORT
-server.listen(port, () => {
+const port = process.env.PORT || 4000; // Default port is 8070, but can be overridden by environment variable PORT
+
+httpsServer.listen(port, () => {
   console.log(`Node app is running on port ${port}`);
 });
 
-// Export the app for use in other modules (e.g., for testing)
 module.exports = app;

